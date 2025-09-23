@@ -1,0 +1,29 @@
+services:
+  crudmysql:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: crud_docker
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  crudbackend:
+    build: ./crudBackend
+    restart: unless-stopped
+    depends_on:
+      - crudmysql
+    ports:
+      - "8888:8080"
+
+  crudfrontend:
+    build: ./crudFrontend
+    restart: unless-stopped
+    ports:
+      - "5173:8080"
+
+volumes:
+  mysql_data:

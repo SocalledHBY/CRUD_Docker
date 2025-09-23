@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/crudBackend/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17 (WSL)" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="ProjectUserFactors">
+    <factor id="completionFinishedType">
+      <dailyData date="18-09-2025">
+        <observation name="cancelled" value="2.0" />
+      </dailyData>
+    </factor>
+    <factor id="completionType">
+      <dailyData date="18-09-2025">
+        <observation name="BASIC" value="1.0" />
+      </dailyData>
+    </factor>
+    <factor id="completionUsage">
+      <dailyData date="18-09-2025">
+        <observation name="count" value="2.0" />
+      </dailyData>
+    </factor>
+    <factor id="itemPosition" />
+    <factor id="mnemonicsUsage" />
+    <factor id="prefixLength" />
+    <factor id="prefixMatchingType" />
+    <factor id="templatesUsage" />
+    <factor id="timeBetweenTyping" />
+  </component>
+</project>
