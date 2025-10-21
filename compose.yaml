@@ -1,5 +1,5 @@
 services:
-  crudmysql:
+  db:
     image: mysql:8
     restart: unless-stopped
     environment:
@@ -8,18 +8,18 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
 
-  crudbackend:
+  backend:
     build: ./crudBackend
     restart: unless-stopped
     depends_on:
-      - crudmysql
+      - db
     ports:
       - "8888:8080"
 
-  crudfrontend:
+  frontend:
     build: ./crudFrontend
     restart: unless-stopped
     ports:

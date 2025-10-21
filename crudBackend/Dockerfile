@@ -1,7 +1,7 @@
 FROM amazoncorretto:17
 
-COPY ./target/crudBackend-0.1.jar /opt/
+COPY ./target/crud-backend-0.1.jar /opt/
 
-CMD ["java", "-jar", "/opt/crudBackend-0.1.jar"]
+CMD ["java", "-jar", "/opt/crud-backend-0.1.jar"]
 
 EXPOSE 8080

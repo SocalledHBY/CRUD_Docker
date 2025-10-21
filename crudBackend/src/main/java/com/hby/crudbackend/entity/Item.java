@@ -10,7 +10,7 @@ import lombok.Data;
 public class Item {
 
     @TableId(value = "itemId", type = IdType.AUTO)
-    int itemId;
+    Integer itemId;
     String name;
     String description;
 }
