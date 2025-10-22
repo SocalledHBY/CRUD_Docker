@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ItemService {
 
-    public List<Item> getAllItems();
+    public List<Item> getAllItems(int page);
 
     public Item getItemById(int itemId);
 

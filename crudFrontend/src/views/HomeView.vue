@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 
@@ -11,22 +11,30 @@ interface Item {
 
 const router = useRouter();
 
-const data_ready = ref(false);
+const pageSize = 10;
+const totalPages = ref(1);
 const itemList = ref<Array<Item>>([]);
+const currentPage = ref(1);
+watch(currentPage, (currentPage, previousPage) => {
+  if (currentPage !== previousPage) {
+    fetchItems(currentPage);
+  }
+});
 
-const fetchItems = () => {
-  fetch('http://localhost:8888/items')
+const fetchItems = (page: number) => {
+  fetch(`http://localhost:8888/items?page=${page}`)
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        itemList.value = data.data;
-        data_ready.value = true;
+        totalPages.value = data.data.total;
+        itemList.value = data.data.page;
+        currentPage.value = page;
       } else {
         ElMessage.error('获取物品列表失败');
       }
     });
 };
-fetchItems();
+fetchItems(1);
 
 const modifyItem = (row: Item) => {
   router.push({ name: 'modify', params: { itemId: row.itemId } });
@@ -37,7 +45,7 @@ const removeItem = (row: Item) => {
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        fetchItems();
+        fetchItems(1);
         ElMessage({
           message: '删除成功',
           type: 'success',
@@ -52,6 +60,7 @@ const removeItem = (row: Item) => {
 <template>
   <main>
     <el-table :data="itemList" stripe style="width: 100%">
+      <el-table-column type="index" width="50" />
       <el-table-column prop="itemId" label="物品ID" width="80" />
       <el-table-column prop="name" label="物品名称" width="120" />
       <el-table-column prop="description" label="物品描述" />
@@ -66,5 +75,7 @@ const removeItem = (row: Item) => {
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination layout="prev, pager, next" :page-count="Math.ceil(totalPages / pageSize)"
+      v-model:current-page="currentPage" />
   </main>
 </template>

@@ -1,5 +1,6 @@
 package com.hby.crudbackend.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.hby.crudbackend.entity.Item;
 import com.hby.crudbackend.mapper.ItemMapper;
 import com.hby.crudbackend.service.ItemService;
@@ -15,7 +16,9 @@ public class ItemServiceImpl implements ItemService {
     private ItemMapper itemMapper;
 
     @Override
-    public List<Item> getAllItems() {
+    public List<Item> getAllItems(int page) {
+        int pageSize = 10;
+        PageHelper.startPage(page, pageSize);
         return itemMapper.selectList(null);
     }
 
