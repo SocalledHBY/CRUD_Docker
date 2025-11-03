@@ -10,7 +10,7 @@ const form = reactive({
   name: '',
   description: '',
 });
-fetch('http://localhost:8888/item/' + router.currentRoute.value.params.itemId)
+fetch(`${import.meta.env.VITE_API_URL}/item/${router.currentRoute.value.params.itemId}`)
   .then(res => res.json())
   .then(data => {
     if (data.success) {
@@ -23,7 +23,7 @@ fetch('http://localhost:8888/item/' + router.currentRoute.value.params.itemId)
   });
 
 const submit = () => {
-  fetch('http://localhost:8888/item/modify', {
+  fetch(`${import.meta.env.VITE_API_URL}/item/modify`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

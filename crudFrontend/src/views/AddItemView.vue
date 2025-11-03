@@ -8,7 +8,7 @@ const form = reactive({
 });
 
 const submit = () => {
-  fetch('http://localhost:8888/item/add', {
+  fetch(`${import.meta.env.VITE_API_URL}/item/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

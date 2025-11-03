@@ -2,10 +2,15 @@ spring:
   application:
     name: crud-backend
   datasource:
-    url: jdbc:mysql://db:3306/crud_docker?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://mysql:3306/crud_docker?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: localhost
+      password: 1234
+      port: 6380
 pagehelper:
   reasonable: false
   defaultCount: true

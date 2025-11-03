@@ -1,10 +1,10 @@
 package com.hby.crudbackend.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.hby.crudbackend.entity.R;
 import com.hby.crudbackend.entity.Item;
 import com.hby.crudbackend.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -17,13 +17,15 @@ public class ItemController {
     @Autowired
     ItemService itemService;
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @GetMapping("/items")
     public R<Map<String,Object>> getAllItems(@RequestParam(defaultValue = "1") int page) {
         List<Item> itemList = itemService.getAllItems(page);
-        PageInfo<Item> pageInfo = new PageInfo<>(itemList);
 
         Map<String,Object> pageMap = new HashMap<>();
-        pageMap.put("total", pageInfo.getTotal());
+        pageMap.put("total", stringRedisTemplate.opsForValue().get("total"));
         pageMap.put("page", itemList);
         return R.successWithData(2000, "success", pageMap);
     }

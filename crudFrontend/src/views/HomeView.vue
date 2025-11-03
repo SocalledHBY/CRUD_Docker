@@ -22,11 +22,11 @@ watch(currentPage, (currentPage, previousPage) => {
 });
 
 const fetchItems = (page: number) => {
-  fetch(`http://localhost:8888/items?page=${page}`)
+  fetch(`${import.meta.env.VITE_API_URL}/items?page=${page}`)
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        totalPages.value = data.data.total;
+        totalPages.value = Number(data.data.total);
         itemList.value = data.data.page;
         currentPage.value = page;
       } else {
@@ -41,7 +41,7 @@ const modifyItem = (row: Item) => {
 };
 
 const removeItem = (row: Item) => {
-  fetch('http://localhost:8888/item/remove/' + row.itemId)
+  fetch(`${import.meta.env.VITE_API_URL}/item/remove/${row.itemId}`)
     .then(res => res.json())
     .then(data => {
       if (data.success) {
